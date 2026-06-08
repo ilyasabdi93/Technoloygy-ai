@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Technology ai – Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <style>
+        /* ── Reset ── */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            background: #0a0a0f;
+        }
+
+        /* ── Animated Background ── */
+        .bg-layer {
+            position: fixed;
+            inset: -10%;
+            z-index: -1;
+            background: url('https://i.ibb.co/Q77t0T27/e0028734ba22fb10547cca0b7819ec8d-webp.webp') center/cover no-repeat;
+            animation: bgZoomOut 25s ease-in-out infinite alternate;
+            filter: brightness(0.4) saturate(1.2);
+        }
+
+        @keyframes bgZoomOut {
+            0%   { transform: scale(1.2); }
+            100% { transform: scale(1.0); }
+        }
+
+        /* Dark overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 5%;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .nav-brand span { color: #4ade80; }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.25s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4ade80;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-auth {
+            display: flex;
+            gap: 12px;
+        }
+        .nav-auth a {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+        .nav-auth .login-link {
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .nav-auth .login-link:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        .nav-auth .signup-link {
+            color: #0a1a0a;
+            background: #4ade80;
+        }
+        .nav-auth .signup-link:hover {
+            background: #22c55e;
+            transform: scale(1.03);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ── Hero Section ── */
+        section.hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 5% 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .hero h1 span { color: #4ade80; }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.7;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero-buttons a {
+            padding: 14px 34px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .hero-buttons .btn-primary {
+            background: #4ade80;
+            color: #0a1a0a;
+        }
+        .hero-buttons .btn-primary:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.35);
+        }
+        .hero-buttons .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .hero-buttons .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* ── Zoom Slider Section ── */
+        section.slider-section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-title span { color: #4ade80; }
+        .section-sub {
+            opacity: 0.6;
+            margin-bottom: 48px;
+            font-size: 1rem;
+        }
+
+        .zoom-slider {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            aspect-ratio: 16 / 9;
+        }
+
+        .zoom-slider .slides-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .zoom-slider .slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+        .zoom-slider .slide.active {
+            opacity: 1;
+        }
+        .zoom-slider .slide .zoom-inner {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            animation: zoomPhoto 6s ease-in-out forwards;
+        }
+
+        @keyframes zoomPhoto {
+            0%   { transform: scale(1.0); }
+            100% { transform: scale(1.15); }
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .slider-controls .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .slider-controls .dot.active {
+            background: #4ade80;
+            transform: scale(1.2);
+        }
+
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .slider-arrows button {
+            pointer-events: all;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background 0.25s;
+            backdrop-filter: blur(4px);
+        }
+        .slider-arrows button:hover {
+            background: rgba(74, 222, 128, 0.4);
+        }
+
+        /* ── About Section ── */
+        section.about {
+            padding: 80px 5%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .about-text h2 span { color: #4ade80; }
+        .about-text p {
+            opacity: 0.7;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+        .about-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .about-stats .stat h3 {
+            font-size: 2rem;
+            color: #4ade80;
+            font-weight: 700;
+        }
+        .about-stats .stat p {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 0;
+        }
+        .about-image {
+            flex: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            aspect-ratio: 4/3;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80') center/cover;
+            min-height: 300px;
+        }
+
+        /* ── Contact Section ── */
+        section.contact {
+            padding: 80px 5%;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .contact h2 span { color: #4ade80; }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 40px;
+            text-align: left;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.25s, background 0.25s;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.35);
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #4ade80;
+            background: rgba(255,255,255,0.08);
+        }
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+        .contact-form button {
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: #0a1a0a;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-form button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(74, 222, 128, 0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .contact-info .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        .contact-info .info-item svg {
+            width: 20px;
+            height: 20px;
+            fill: #4ade80;
+        }
+
+        /* ── Auth Modal ── */
+        .auth-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-overlay.open {
+            display: flex;
+        }
+
+        .auth-modal {
+            background: rgba(20, 20, 28, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 40px;
+            width: 420px;
+            max-width: 90vw;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.25s;
+        }
+        .auth-close:hover { color: #fff; }
+
+        .auth-modal .brand-small {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .auth-modal .brand-small span { color: #4ade80; }
+        .auth-modal .auth-subtitle {
+            text-align: center;
+            opacity: 0.5;
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.25s;
+        }
+        .auth-form input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        .auth-form input:focus {
+            border-color: #4ade80;
+        }
+        .auth-form .btn-primary {
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: #0a1a0a;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .auth-form .btn-primary:hover {
+            transform: scale(1.02);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+            margin: 6px 0;
+        }
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .google-auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.25s;
+            min-height: 44px;
+        }
+        .google-auth-btn:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+        .auth-toggle a {
+            color: #4ade80;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .auth-toggle a:hover { text-decoration: underline; }
+
+        .auth-form.hidden {
+            display: none;
+        }
+
+        /* ── Footer ── */
+        footer {
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-auth { display: none; }
+            .hamburger { display: flex; }
+
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10,10,15,0.95);
+                padding: 24px 5%;
+                gap: 20px;
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            .nav-auth.mobile-open {
+                display: flex;
+                margin-top: 12px;
+            }
+
+            .hero h1 { font-size: 2.4rem; }
+            .hero p { font-size: 1rem; }
+
+            section.about {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .about-stats {
+                gap: 24px;
+            }
+            .about-stats .stat h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background -->
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <!-- ─── Navigation ─── -->
+    <nav>
+        <div class="nav-brand">Technolog<span>y</span> ai</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMobileNav()">Home</a></li>
+            <li><a href="#slider" onclick="closeMobileNav()">Slider</a></li>
+            <li><a href="#about" onclick="closeMobileNav()">About</a></li>
+            <li><a href="#contact" onclick="closeMobileNav()">Contact</a></li>
+            <li class="mobile-auth-links" style="display:none;">
+                <div class="nav-auth" style="display:flex;">
+                    <a href="#" class="login-link" onclick="openAuth('login')">Login</a>
+                    <a href="#" class="signup-link" onclick="openAuth('register')">Sign Up</a>
+                </div>
+            </li>
+        </ul>
+        <div class="nav-auth">
+            <a href="#" class="login-link" onclick="openAuth('login')">Login</a>
+            <a href="#" class="signup-link" onclick="openAuth('register')">Sign Up</a>
+        </div>
+        <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ─── Hero ─── -->
+    <section class="hero" id="home">
+        <h1>Build the Future with <span>Technology ai</span></h1>
+        <p>Empowering innovation through next-generation artificial intelligence solutions. Transform your ideas into reality.</p>
+        <div class="hero-buttons">
+            <a href="#slider" class="btn-primary">Explore Slider</a>
+            <a href="#about" class="btn-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- ─── Zoom Slider ─── -->
+    <section class="slider-section" id="slider">
+        <h2 class="section-title">Photo <span>Gallery</span></h2>
+        <p class="section-sub">Explore our collection with smooth zoom transitions</p>
+        <div class="zoom-slider" id="zoomSlider">
+            <div class="slides-wrapper" id="slidesWrapper"></div>
+            <div class="slider-controls" id="sliderControls"></div>
+            <div class="slider-arrows">
+                <button onclick="prevSlide()">&#10094;</button>
+                <button onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── About ─── -->
+    <section class="about" id="about">
+        <div class="about-text">
+            <h2>About <span>Technology ai</span></h2>
+            <p>We are a cutting-edge technology company specializing in artificial intelligence, machine learning, and digital transformation. Our mission is to make advanced AI accessible to every business.</p>
+            <p>Founded in 2024, we've helped over 500 companies integrate AI into their workflows, resulting in measurable efficiency gains and innovative breakthroughs.</p>
+            <div class="about-stats">
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Clients</p>
+                </div>
+                <div class="stat">
+                    <h3>98%</h3>
+                    <p>Satisfaction</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Support</p>
+                </div>
+            </div>
+        </div>
+        <div class="about-image"></div>
+    </section>
+
+    <!-- ─── Contact ─── -->
+    <section class="contact" id="contact">
+        <h2>Get in <span>Touch</span></h2>
+        <p style="opacity:0.6; margin-bottom:8px;">Have a project? We'd love to hear from you.</p>
+        <form class="contact-form" onsubmit="handleContact(event)">
+            <input type="text" placeholder="Your name" required />
+            <input type="email" placeholder="Your email" required />
+            <input type="text" placeholder="Subject" />
+            <textarea placeholder="Your message..." required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <div class="info-item">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                hello@technologyai.io
+            </div>
+            <div class="info-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                San Francisco, CA
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Auth Modal ─── -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <button class="auth-close" onclick="closeAuth()">&times;</button>
+            <div class="brand-small">Technolog<span>y</span> ai</div>
+            <p class="auth-subtitle">Sign in to your account</p>
+
+            <!-- Login -->
+            <div id="authLogin" class="auth-form">
+                <input type="email" id="loginEmail" placeholder="Email address" />
+                <input type="password" id="loginPassword" placeholder="Password" />
+                <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                <div class="auth-divider">or</div>
+                <div class="google-auth-btn" id="googleSignInBtn">Continue with Google</div>
+                <div class="auth-toggle">
+                    Don't have an account? <a onclick="switchAuth('register')">Create one</a>
+                </div>
+            </div>
+
+            <!-- Register -->
+            <div id="authRegister" class="auth-form hidden">
+                <input type="text" id="regName" placeholder="Full name" />
+                <input type="email" id="regEmail" placeholder="Email address" />
+                <input type="password" id="regPassword" placeholder="Password" />
+                <input type="password" id="regConfirm" placeholder="Confirm password" />
+                <button class="btn-primary" onclick="handleRegister()">Create Account</button>
+                <div class="auth-divider">or</div>
+                <div class="google-auth-btn" id="googleSignUpBtn">Sign up with Google</div>
+                <div class="auth-toggle">
+                    Already registered? <a onclick="switchAuth('login')">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Footer ─── -->
+    <footer>
+        &copy; 2026 Technology ai. All rights reserved.
+    </footer>
+
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script>
+    // ═══════════════════════════════════════════════════════════════════════
+    // 1.  CONFIGURATION
+    // ═══════════════════════════════════════════════════════════════════════
+
+    const CONFIG = {
+        clientId: '977449523395-h1idafqvkogt8mkumf8s22koe5rk97dd.apps.googleusercontent.com',
+        slides: [
+            'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1100&q=80',
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1100&q=80',
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1100&q=80',
+            'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1100&q=80',
+            'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1100&q=80',
+        ],
+    };
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // 2.  MOBILE NAV
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function toggleMobileNav() {
+        const links = document.getElementById('navLinks');
+        const auth = document.querySelector('.nav-auth');
+        links.classList.toggle('mobile-open');
+        auth.classList.toggle('mobile-open');
+    }
+
+    function closeMobileNav() {
+        const links = document.getElementById('navLinks');
+        const auth = document.querySelector('.nav-auth');
+        links.classList.remove('mobile-open');
+        auth.classList.remove('mobile-open');
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // 3.  ZOOM SLIDER
+    // ═══════════════════════════════════════════════════════════════════════
+
+    let currentSlide = 0;
+    let slideInterval = null;
+    const SLIDE_DURATION = 5000;
+
+    function initSlider() {
+        const wrapper = document.getElementById('slidesWrapper');
+        const controls = document.getElementById('sliderControls');
+        wrapper.innerHTML = '';
+        controls.innerHTML = '';
+
+        CONFIG.slides.forEach((url, i) => {
+            // Slide container
+            const slide = document.createElement('div');
+            slide.className = 'slide' + (i === 0 ? ' active' : '');
+            slide.dataset.index = i;
+
+            const inner = document.createElement('div');
+            inner.className = 'zoom-inner';
+            inner.style.backgroundImage = `url('${url}')`;
+
+            slide.appendChild(inner);
+            wrapper.appendChild(slide);
+
+            // Dot
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            controls.appendChild(dot);
+        });
+
+        startAutoSlide();
+    }
+
+    function goToSlide(index) {
+        const slides = document.querySelectorAll('.zoom-slider .slide');
+        const dots = document.querySelectorAll('.slider-controls .dot');
+
+        slides.forEach((s, i) => {
+            s.classList.toggle('active', i === index);
+            // Restart zoom animation
+            const inner = s.querySelector('.zoom-inner');
+            if (i === index) {
+                inner.style.animation = 'none';
+                void inner.offsetHeight; // trigger reflow
+                inner.style.animation = 'zoomPhoto 6s ease-in-out forwards';
+            }
+        });
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        currentSlide = index;
+        resetAutoSlide();
+    }
+
+    function nextSlide() {
+        const next = (currentSlide + 1) % CONFIG.slides.length;
+        goToSlide(next);
+    }
+
+    function prevSlide() {
+        const prev = (currentSlide - 1 + CONFIG.slides.length) % CONFIG.slides.length;
+        goToSlide(prev);
+    }
+
+    function startAutoSlide() {
+        slideInterval = setInterval(nextSlide, SLIDE_DURATION);
+    }
+
+    function resetAutoSlide() {
+        if (slideInterval) clearInterval(slideInterval);
+        startAutoSlide();
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // 4.  AUTH MODAL
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function openAuth(mode) {
+        document.getElementById('authOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        switchAuth(mode);
+    }
+
+    function closeAuth() {
+        document.getElementById('authOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function switchAuth(mode) {
+        const login = document.getElementById('authLogin');
+        const register = document.getElementById('authRegister');
+        const subtitle = document.querySelector('.auth-subtitle');
+
+        if (mode === 'login') {
+            login.classList.remove('hidden');
+            register.classList.add('hidden');
+            subtitle.textContent = 'Sign in to your account';
+        } else {
+            login.classList.add('hidden');
+            register.classList.remove('hidden');
+            subtitle.textContent = 'Create your account';
+        }
+    }
+
+    // Close on overlay click
+    document.getElementById('authOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeAuth();
+    });
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAuth();
+    });
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // 5.  FORM HANDLERS
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function handleLogin() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const pass  = document.getElementById('loginPassword').value;
+        if (!email || !pass) {
+            alert('Please fill in both email and password.');
+            return;
+        }
+        console.log('[Login]', { email });
+        alert(`Welcome back, ${email}!`);
+        closeAuth();
+    }
+
+    function handleRegister() {
+        const name    = document.getElementById('regName').value.trim();
+        const email   = document.getElementById('regEmail').value.trim();
+        const pass    = document.getElementById('regPassword').value;
+        const confirm = document.getElementById('regConfirm').value;
+
+        if (!name || !email || !pass || !confirm) {
+            alert('All fields are required.');
+            return;
+        }
+        if (pass !== confirm) {
+            alert('Passwords do not match.');
+            return;
+        }
+        console.log('[Register]', { name, email });
+        alert(`Account created for ${name}! You can now sign in.`);
+        switchAuth('login');
+    }
+
+    function handleContact(e) {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.querySelector('input').value;
+        alert(`Thanks ${name}! We'll get back to you soon.`);
+        form.reset();
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // 6.  GOOGLE AUTH
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function handleGoogleCredential(response) {
+        console.log('[Google JWT]', response.credential);
+        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+        console.log('[Google User]', payload);
+        alert(`Signed in as ${payload.name} (${payload.email})`);
+        closeAuth();
+    }
+
+    function initGoogleAuth() {
+        if (typeof google === 'undefined' || !google.accounts) {
+            console.warn('Google Identity Services not loaded — retrying...');
+            setTimeout(initGoogleAuth, 1000);
+            return;
+        }
+
+        google.accounts.id.initialize({
+            client_id: CONFIG.clientId,
+            callback: handleGoogleCredential,
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById('googleSignInBtn'),
+            { theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill' }
+        );
+
+        google.accounts.id.renderButton(
+            document.getElementById('googleSignUpBtn'),
+            { theme: 'outline', size: 'large', text: 'signup_with', shape: 'pill' }
+        );
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // 7.  BOOT
+    // ═══════════════════════════════════════════════════════════════════════
+
+    window.addEventListener('load', () => {
+        initSlider();
+        initGoogleAuth();
+    });
+    </script>
+
+</body>
+  </html>
